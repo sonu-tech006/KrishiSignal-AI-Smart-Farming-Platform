@@ -1,0 +1,764 @@
+# MASTER PROMPT: BUILD KRISHISIGNAL
+
+Act as a senior full-stack software architect, AI engineer, UI/UX designer, agricultural technology researcher, and database engineer.
+
+Build a complete, modern, responsive, production-oriented full-stack application named **KrishiSignal — AI-Powered Smart Farming and Agricultural Decision Support Platform**.
+
+Do not build just a landing page, static dashboard, UI prototype, or generic chatbot. Build a functional application with real authentication, persistent database storage, working APIs, external data integrations, meaningful agricultural workflows, loading/error states, and deployment instructions.
+
+The application is intended for Indian farmers, initially focusing on Uttar Pradesh, with architecture that supports expansion to other Indian states.
+
+==================================================
+1. CORE PROBLEM AND SOLUTION
+==================================================
+
+Indian farmers frequently lack a single accessible platform that combines:
+- Local weather forecasts and agricultural weather warnings.
+- Crop selection and crop-stage guidance.
+- Explainable irrigation recommendations.
+- Actual agricultural product and seed-variety information.
+- Current available mandi prices.
+- Hindi-language and voice-based agricultural assistance.
+- Farm activity, expense, and crop outcome tracking.
+- Maps, location-specific information, and notifications.
+
+KrishiSignal should help farmers make better-informed farming decisions using verified data, transparent explanations, and simple language.
+
+The system must distinguish between:
+1. Verified facts retrieved from a source.
+2. Forecasts provided by weather services.
+3. Calculated estimates.
+4. AI-generated explanations.
+5. Recommendations that require professional or local agricultural verification.
+
+Never invent real-time prices, weather readings, product availability, government schemes, official warnings, or agricultural facts.
+
+==================================================
+2. MANDATORY TECHNOLOGY STACK
+==================================================
+
+Frontend:
+- Next.js with App Router.
+- React and TypeScript.
+- Tailwind CSS.
+- shadcn/ui components.
+- Lucide icons.
+- React Hook Form and Zod for form validation.
+- Recharts for analytical charts.
+- Leaflet with suitable OpenStreetMap-compatible map tiles.
+- Responsive, accessible mobile-first design.
+
+Authentication:
+- Clerk for sign-up, sign-in, sessions, account management, and protected pages.
+- Use the supported Clerk integration for the installed Next.js version.
+- Associate application records with the authenticated Clerk user ID.
+- Enforce authorization on the server for every private resource.
+
+Database:
+- MongoDB Atlas.
+- Mongoose.
+- Proper schemas, validation, timestamps, indexes, and relationships through identifiers.
+- GeoJSON coordinates and geospatial indexes where appropriate.
+
+AI:
+- Google Gemini API through the official supported SDK.
+- Use current supported model identifiers configured through environment variables.
+- Do not hardcode obsolete model names.
+- Keep AI API calls on the server.
+- Use structured outputs, grounded retrieval, and server-side validation.
+- Support Hindi and English, with extensibility for additional Indian languages.
+
+Python:
+- Optional FastAPI microservice for crop image classification or specialized ML workflows.
+- Keep it separate from the Next.js application.
+- Do not require a Python service for basic functionality if no model has been configured.
+
+Data sources:
+- Open-Meteo for weather forecasts and geocoding.
+- India Meteorological Department (IMD) official warnings/advisories when supported access is available.
+- Government of India data.gov.in and authorized AGMARKNET-related datasets/APIs for mandi prices.
+- Official agricultural university, ICAR, state agriculture department, and government publications for agricultural knowledge.
+- Verified agricultural product catalogs, official variety records, and permitted seller/product APIs.
+- OpenStreetMap-compatible mapping data.
+
+Use official provider documentation to implement integrations. Do not fabricate API endpoints, API responses, or credentials.
+
+==================================================
+3. DESIGN AND USER EXPERIENCE
+==================================================
+
+Create a premium, professional agricultural SaaS interface.
+
+Visual direction:
+- Deep forest green as the primary brand color.
+- Fresh leaf green as the accent.
+- Warm off-white backgrounds.
+- White cards, subtle borders, restrained shadows.
+- High-contrast readable text.
+- Clean typography and consistent spacing.
+- Real agricultural photography only where appropriate.
+- Avoid excessive gradients, oversized headings, unnecessary animations, and cluttered dashboards.
+
+Support:
+- Desktop, tablet, and mobile layouts.
+- Hindi and English language selection.
+- Clear navigation.
+- Accessible buttons, keyboard navigation, labels, and contrast.
+- Skeleton loaders, empty states, error messages, and retry actions.
+- Toast notifications for completed operations.
+- Confirmation dialogs for destructive actions.
+- Offline indicators and stale-data labels where appropriate.
+
+Create a public landing page with:
+- Hero section and clear value proposition.
+- Product feature overview.
+- How KrishiSignal works.
+- Weather, crop, mandi, and product information previews.
+- Trust and data-source section.
+- Call to action for farmer registration.
+- Footer with privacy, terms, contact, and disclaimer links.
+
+After authentication, display a personalized farmer dashboard.
+
+==================================================
+4. IMPLEMENT ALL 45 FEATURE REQUIREMENTS
+==================================================
+
+MODULE A — AUTHENTICATION AND FARM PROFILE
+
+1. Clerk signup, login, logout, session management, and account recovery.
+2. Farmer profile containing name, preferred language, and relevant preferences.
+3. Farm location management: state, district, village, coordinates, and multiple farms.
+4. Farm and soil profiles containing acreage, soil type, irrigation method, water availability, and soil-test information.
+5. Personalized dashboard showing selected farms, crops, weather, alerts, and recent recommendations.
+
+MODULE B — AI ASSISTANT AND SEARCH
+
+6. Hindi and English agricultural AI assistant.
+7. Voice input using browser speech recognition where supported, with a fallback.
+8. Text-to-speech responses with language and voice support where available.
+9. Unified search for crops, products, weather, mandi prices, diseases, and schemes.
+10. Multi-source retrieval using appropriate APIs, database collections, and verified knowledge sources.
+11. Conversation history with appropriate access controls and optional saved context.
+12. Simple-language agricultural explanations with step-by-step answers.
+
+MODULE C — CROP AND IRRIGATION INTELLIGENCE
+
+13. Crop recommendation based on location, season, soil, water, and crop requirements.
+14. Irrigation decision support using crop stage, forecast rainfall, soil information, and watering history.
+15. Crop calendar covering sowing, growth stages, irrigation, monitoring, and harvesting.
+16. Soil health analysis using available soil-test values.
+17. Fertilizer and nutrient planning using verified agronomic guidance.
+18. Seed-rate and agricultural input quantity calculator.
+19. Sowing-window planning using relevant seasonal information and available forecasts.
+20. Explainable comparison of crops, varieties, and farming strategies.
+
+MODULE D — WEATHER AND ALERTS
+
+21. Location-specific current weather and forecast dashboard.
+22. Hourly and daily forecasts where supported by the provider.
+23. Rainfall alerts and irrigation reconsideration notifications.
+24. Heat, cold, heavy rain, and wind risk alerts using actual forecast or official warning data.
+25. Crop-stage-specific weather risk explanations.
+26. In-app notifications and optional email/push notifications.
+27. Historical weather and seasonal trend charts when historical data is available.
+
+MODULE E — AGRICULTURAL PRODUCTS
+
+28. Real wheat seed and other agricultural product search with actual product names and genuine catalog images.
+29. Product categories: seeds, fertilizers, soil amendments, tools, and irrigation equipment.
+30. Filters for crop, variety, manufacturer, package size, price, seller, and intended use where data is available.
+31. Product authenticity, certification, registration, and official variety information when verifiable.
+32. Side-by-side product comparison with sourced specifications.
+33. Seller links, prices, and availability only when supported by a reliable source.
+
+MODULE F — MANDI INTELLIGENCE
+
+34. Mandi prices with commodity, market, date, minimum price, maximum price, and modal price where available.
+35. Historical price charts using retrieved records.
+36. Nearby mandi map with actual coordinates and available market information.
+37. Gross sale-value and estimated net-income calculator.
+38. Mandi comparison and market trend summaries.
+
+MODULE G — CROP HEALTH AND FARM MANAGEMENT
+
+39. AI-assisted crop-leaf image screening, with uncertainty and expert-verification guidance.
+40. Farm diary for sowing, irrigation, fertilizer, pest observations, and harvesting.
+41. Expense and profit tracker.
+42. Recommendation outcome tracking, including actions taken and farmer-reported results.
+43. Moderated farmer community with questions, posts, and reporting tools.
+44. Government schemes and agricultural advisory directory with official-source links.
+45. Progressive Web App support, cached saved information, offline indicators, and clear stale-data warnings.
+
+Implement these features in stages. Keep each feature modular and testable.
+
+==================================================
+5. INTELLIGENT SEARCH ENGINE
+==================================================
+
+Build a central search interface available throughout the authenticated application.
+
+Example searches:
+
+- "मेरे खेत के लिए सबसे अच्छा गेहूँ का बीज कौन सा है?"
+- "What is today's wheat mandi price in Kanpur?"
+- "क्या अगले 24 घंटे में बारिश होगी?"
+- "मेरी गेहूँ की फसल को सिंचाई कब चाहिए?"
+- "Show suitable paddy varieties for my location."
+- "Compare nearby mandis for wheat."
+- "Find an agricultural product for my crop."
+
+Implement an intent router that categorizes queries into:
+- WEATHER
+- CROP_RECOMMENDATION
+- IRRIGATION
+- PRODUCT_SEARCH
+- MANDI_PRICE
+- MARKET_ANALYSIS
+- CROP_HEALTH
+- SOIL_HEALTH
+- GOVERNMENT_SCHEME
+- FARM_MANAGEMENT
+- GENERAL_AGRICULTURAL_QUESTION
+
+For every query:
+1. Detect the user's preferred language.
+2. Extract relevant entities such as crop, location, season, variety, and time period.
+3. Identify missing information.
+4. Retrieve data from the appropriate provider or database.
+5. Validate timestamps, source metadata, and required fields.
+6. Generate an answer using retrieved information and verified agricultural knowledge.
+7. Include source links, freshness information, and uncertainty where relevant.
+8. Save search history only according to the application's privacy settings.
+
+For multi-intent queries, retrieve relevant results from multiple sources and combine them into one structured answer.
+
+Example:
+"Find suitable wheat seeds, today's weather, and the current mandi rate for my district."
+
+Return three distinct sections:
+- Suitable seed varieties and actual catalog products.
+- Local weather forecast and update timestamp.
+- Latest available mandi prices with price dates and market names.
+
+Do not claim all information is live merely because the search was performed now.
+
+==================================================
+6. AGRICULTURAL PRODUCT CATALOG
+==================================================
+
+Product search is a major feature.
+
+When a farmer searches for wheat seeds, show:
+- Actual product or notified variety name.
+- Genuine product image from a permitted catalog or seller source.
+- Manufacturer or brand.
+- Product category and package size.
+- Verified agronomic characteristics.
+- Suitable region and season when documented.
+- Official source or seller link.
+- Price and stock only when actually available.
+- Data source and last-checked timestamp.
+
+Do not generate fictional product names or images and label them as real products.
+
+Separate agricultural varieties from commercial packaged products. A notified variety may exist without a current seller listing.
+
+Build a provider adapter architecture so catalog sources can be added without rewriting the application.
+
+If no live product API is available, display verified catalog records and outbound source links. Clearly state that current stock and price have not been verified.
+
+"Best seed" recommendations must account for region, season, soil, irrigation, and crop objectives. Do not make universal superiority claims.
+
+==================================================
+7. WEATHER, TIME, AND GEOLOCATION
+==================================================
+
+Implement:
+- Search by village, district, or city.
+- Optional browser geolocation after explicit user permission.
+- Location selection and saved farm coordinates.
+- Correct timezone handling for local dates and times.
+- Current conditions and forecast from the configured weather provider.
+- Hourly and daily forecast views.
+- Rainfall probability and amounts where supported.
+- Wind, humidity, and temperature where available.
+- Weather-based farming alerts.
+- Historical records only from a genuine historical source.
+
+Store:
+- Coordinates.
+- Location label.
+- Provider observation/forecast time.
+- API retrieval time.
+- Forecast horizon.
+- Units.
+- Source URL or provider identifier.
+
+Do not confuse forecast data with measured observations. Never invent a local warning or claim an official IMD warning without retrieving one.
+
+==================================================
+8. MANDI PRICE SYSTEM
+==================================================
+
+Use authorized government mandi data sources.
+
+Store:
+- Commodity.
+- Market/mandi name.
+- State and district.
+- Minimum price.
+- Maximum price.
+- Modal price.
+- Unit and currency.
+- Market price date.
+- Provider and retrieval time.
+
+Build:
+- Search by commodity and district.
+- Nearby market map.
+- Market comparison.
+- Historical trend charts.
+- Date-range filters.
+- Sale-value calculator.
+- Missing-data and stale-data states.
+
+Do not confuse the record date with the retrieval date.
+
+If today's market data has not been published or retrieved, show the latest available date instead of fabricating today's rate.
+
+Calculate gross sale value as quantity multiplied by the selected price, with unit conversions validated. Treat transport, commissions, and other costs as separate estimates.
+
+==================================================
+9. CROP AND IRRIGATION RECOMMENDATION ENGINE
+==================================================
+
+Build a transparent recommendation engine using:
+- Crop and growth stage.
+- Sowing date.
+- Farm location.
+- Soil type and available soil-test data.
+- Irrigation method.
+- Soil moisture if available.
+- Recent and forecast rainfall.
+- Temperature and relevant weather conditions.
+- Last irrigation event.
+- Verified agronomic guidance.
+
+Each recommendation must contain:
+- Recommendation text.
+- Preferred language.
+- Supporting inputs.
+- Explanation of why the recommendation was made.
+- Missing inputs and assumptions.
+- Source references.
+- Generated timestamp.
+- Confidence or uncertainty where it can be meaningfully justified.
+- Appropriate safety or expert-verification notes.
+
+Do not use an LLM alone to invent irrigation schedules or fertilizer quantities.
+
+Use deterministic, testable rules based on vetted agricultural guidance for supported cases. If critical information is missing, ask follow-up questions or provide cautious general guidance.
+
+For crop recommendations, show multiple ranked options, the reason for each ranking, and the conditions under which it may be suitable.
+
+==================================================
+10. MAP AND GEOSPATIAL FEATURES
+==================================================
+
+Build an interactive map using Leaflet and an appropriate OpenStreetMap-compatible provider.
+
+Display:
+- Saved farm locations.
+- Selected village/district.
+- Nearby mandis.
+- Agricultural service locations when reliable data is available.
+- Geographically located incidents or community reports if implemented.
+- Relevant map legends and filters.
+
+Use real coordinates from geocoding or verified records.
+
+Implement loading, empty, and map-provider error states.
+
+Respect map-provider usage policies and attribution requirements.
+
+Never expose a farmer's private farm coordinates to other users without explicit authorization.
+
+==================================================
+11. DATABASE MODELS
+==================================================
+
+Implement validated Mongoose schemas for:
+
+Farmer:
+- clerkUserId
+- displayName
+- preferredLanguage
+- notificationPreferences
+- createdAt
+- updatedAt
+
+Farm:
+- ownerId
+- farmName
+- locationLabel
+- state
+- district
+- village
+- coordinates
+- landArea
+- soilType
+- irrigationMethod
+- soilTest
+- createdAt
+- updatedAt
+
+CropCycle:
+- ownerId
+- farmId
+- cropName
+- variety
+- sowingDate
+- cropStage
+- irrigationHistory
+- expectedHarvestDate
+- status
+
+Recommendation:
+- ownerId
+- farmId
+- cropCycleId
+- category
+- inputSnapshot
+- result
+- explanation
+- sourceReferences
+- confidence
+- generatedAt
+- outcomeStatus
+
+WeatherRecord:
+- locationKey
+- coordinates
+- provider
+- recordType
+- observationTime
+- forecastTime
+- fetchedAt
+- weatherData
+
+MandiPrice:
+- commodity
+- marketName
+- state
+- district
+- minimumPrice
+- maximumPrice
+- modalPrice
+- unit
+- priceDate
+- provider
+- fetchedAt
+
+Product:
+- productName
+- varietyName
+- brand
+- category
+- imageUrl
+- description
+- agronomicSpecifications
+- sellerUrl
+- price
+- currency
+- availability
+- source
+- verifiedAt
+
+FarmActivity:
+- ownerId
+- farmId
+- cropCycleId
+- activityType
+- activityDate
+- quantity
+- unit
+- cost
+- notes
+
+Alert:
+- ownerId
+- farmId
+- category
+- severity
+- message
+- source
+- eventTime
+- readAt
+- expiresAt
+
+Conversation:
+- ownerId
+- messages
+- language
+- createdAt
+- updatedAt
+
+RecommendationOutcome:
+- ownerId
+- recommendationId
+- actionTaken
+- farmerFeedback
+- observedOutcome
+- recordedAt
+
+Also add validated models for expenses, community posts, comments, official scheme references, saved products, and notification delivery status where those modules are implemented.
+
+Add appropriate indexes and pagination. Avoid unbounded arrays in documents that grow over time.
+
+==================================================
+12. API ARCHITECTURE
+==================================================
+
+Implement validated server-side routes such as:
+
+GET/POST /api/farms
+GET/POST /api/crops
+GET /api/weather
+GET /api/mandi
+GET /api/products
+GET /api/search
+POST /api/assistant
+GET/POST /api/recommendations
+GET/POST /api/alerts
+GET/POST /api/farm-activities
+GET/POST /api/expenses
+GET/POST /api/recommendation-outcomes
+
+Add update/delete routes where needed.
+
+Requirements:
+- Authenticate private requests.
+- Validate parameters and bodies using Zod.
+- Verify record ownership.
+- Use appropriate HTTP status codes.
+- Return consistent JSON response structures.
+- Add pagination, sorting, and input limits.
+- Implement rate limiting for expensive endpoints.
+- Handle upstream provider errors and timeouts.
+- Never leak stack traces, API secrets, or internal provider credentials.
+- Use caching where appropriate.
+- Never let clients choose arbitrary upstream URLs.
+- Do not expose private farmer data in public search results.
+
+==================================================
+13. USER INTERFACE PAGES
+==================================================
+
+Implement the following pages:
+
+Public:
+- /
+- /features
+- /about
+- /privacy
+- /terms
+
+Authentication:
+- /sign-in
+- /sign-up
+
+Authenticated:
+- /dashboard
+- /assistant
+- /search
+- /farms
+- /farms/[farmId]
+- /crops
+- /crops/[cropCycleId]
+- /irrigation
+- /crop-calendar
+- /soil-health
+- /weather
+- /mandi
+- /products
+- /products/[productId]
+- /map
+- /crop-health
+- /farm-diary
+- /expenses
+- /recommendations
+- /alerts
+- /community
+- /schemes
+- /settings
+
+Implement sensible navigation and ensure that every displayed navigation item leads to a working page.
+
+Do not create empty placeholder pages for features that are advertised as completed. If a feature is not yet implemented, label it clearly as coming soon.
+
+==================================================
+14. SECURITY AND PRIVACY
+==================================================
+
+Implement:
+- Clerk-based authentication.
+- Server-side ownership checks.
+- Environment-based secrets.
+- Input validation and output sanitization.
+- Safe image upload validation.
+- File size and type limits.
+- Rate limiting.
+- Secure error handling.
+- Privacy-conscious location permissions.
+- Appropriate access controls for conversations and farm records.
+- Logging without exposing sensitive data.
+- Protection against unauthorized access to other farmers' records.
+
+Use least-privilege access. Never include real API keys in source code or commit secrets to GitHub.
+
+==================================================
+15. TESTING
+==================================================
+
+Write tests for:
+- Authentication and protected routes.
+- Cross-user access prevention.
+- Farm CRUD operations.
+- Invalid request validation.
+- Search intent classification.
+- Weather-provider failures.
+- Missing and stale mandi data.
+- Price calculations and unit conversions.
+- Irrigation recommendation rules.
+- Product source metadata.
+- Hindi/English response formatting.
+- Offline and error states.
+- Critical end-to-end farmer workflows.
+
+Use mocked external providers for automated tests. Never depend on live external APIs for every test.
+
+==================================================
+16. ENVIRONMENT VARIABLES
+==================================================
+
+Create .env.example containing documented placeholders for all required integrations, for example:
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+MONGODB_URI=
+GEMINI_API_KEY=
+WEATHER_API_BASE_URL=
+DATA_GOV_IN_API_KEY=
+IMD_API_BASE_URL=
+NEXT_PUBLIC_MAP_TILE_URL=
+PYTHON_SERVICE_URL=
+
+Add optional provider-specific variables only when needed.
+
+Use the exact environment variable names required by the installed libraries. Do not require a provider's API key if a feature can function through another configured source.
+
+Never put server-side secrets in NEXT_PUBLIC variables.
+
+==================================================
+17. DEVELOPMENT PLAN
+==================================================
+
+Build the application in phases:
+
+Phase 1:
+- Project scaffold.
+- UI theme and shared components.
+- Clerk authentication.
+- MongoDB connection.
+- Farmer profile.
+- Farm CRUD.
+- Protected dashboard.
+
+Phase 2:
+- Weather and geocoding.
+- Location selection.
+- Mandi data adapter.
+- Maps and charts.
+- Source timestamps and caching.
+
+Phase 3:
+- Agricultural knowledge base.
+- Crop recommendation rules.
+- Irrigation decision support.
+- Hindi/English AI assistant.
+- Unified search and source-backed answers.
+
+Phase 4:
+- Actual agricultural product catalog.
+- Product images and comparisons.
+- Seller/source links.
+- Market analytics.
+
+Phase 5:
+- Voice.
+- Notifications.
+- Crop-health image screening.
+- Farm diary.
+- Expenses and outcomes.
+- Community, schemes, and offline support.
+
+Phase 6:
+- Automated tests.
+- Security review.
+- Deployment instructions.
+- README.
+- Architecture diagrams.
+- Database documentation.
+- Final-year project report outline.
+- Demo data clearly labelled as demo data.
+
+Prioritize a working, tested core before implementing advanced features.
+
+==================================================
+18. IMPLEMENTATION RULES
+==================================================
+
+1. Inspect the generated project structure before making changes.
+2. Create complete files with consistent imports and correct types.
+3. Avoid pseudo-code and TODO-only implementations for core features.
+4. Do not claim a feature works if its implementation or credentials are missing.
+5. Do not use mock data in a production data view unless explicitly labelled as demo data.
+6. Do not invent API endpoints, model names, product details, market prices, or weather readings.
+7. Use graceful fallback states when a provider is unavailable.
+8. Do not expose secrets in browser code.
+9. Ensure the project builds and TypeScript checks pass.
+10. Add clear setup and deployment instructions.
+11. Keep integrations modular so providers can be changed independently.
+12. Use a real image URL from an approved catalog for real products; do not fabricate product imagery.
+13. Keep agricultural recommendations explainable and appropriately cautious.
+14. Ask for clarification only if a genuinely blocking decision cannot be handled with a reasonable default.
+15. Do not attempt to implement all 45 features in a single unverified code dump.
+
+==================================================
+19. REQUIRED DELIVERABLES
+==================================================
+
+Deliver:
+- A complete working Next.js project.
+- Responsive user interface.
+- Clerk authentication integration.
+- MongoDB models and database connection.
+- Working server-side API routes.
+- Configurable external API integrations.
+- Intelligent search and multilingual assistant.
+- Weather and mandi data views.
+- Product catalog and comparison.
+- Farm and crop management.
+- Recommendation and outcome tracking.
+- Tests for critical functionality.
+- .env.example.
+- README with exact setup commands.
+- API documentation.
+- Architecture and data-flow diagrams.
+- Deployment instructions.
+- Final-year project documentation outline.
+
+Begin by inspecting the environment and creating the project scaffold. Then implement Phase 1 completely, verify it, and continue to the next phase. If the environment cannot complete all phases in one session, finish the current phase, list completed files and tests, and provide exact continuation instructions.
+
+The final result should be a coherent, secure, useful agricultural decision-support platform, not merely a visually attractive demo.
