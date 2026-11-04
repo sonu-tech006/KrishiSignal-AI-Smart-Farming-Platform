@@ -6,7 +6,8 @@ import {
   Plus, 
   CheckCircle2, 
   ShieldCheck, 
-  Sparkles 
+  Sparkles,
+  X
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { INITIAL_COMMUNITY_POSTS } from '../../data/mockData';
@@ -131,48 +132,62 @@ export const CommunityView: React.FC = () => {
 
       {/* 3. NEW POST MODAL */}
       {showModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 animate-in fade-in">
-            <h3 className="text-base font-bold text-slate-900 mb-3">
-              {language === 'hi' ? 'किसान चौपाल पर सवाल पूछें' : 'Post Question to Kisan Chaupal'}
-            </h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" 
+            onClick={() => setShowModal(false)} 
+          />
+          <div className="relative bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 z-10 animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+              <h3 className="text-base font-bold text-slate-900">
+                Ask Question to Kisan Chaupal Community
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowModal(false)}
+                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                title="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
             <form onSubmit={handleCreatePost} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">श्रेणी (Category)</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Category</label>
                 <select
                   value={postCategory}
                   onChange={(e) => setPostCategory(e.target.value as any)}
                   className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none"
                 >
-                  <option value="Crop Disease">Crop Disease (रोग व कीट)</option>
+                  <option value="Crop Disease">Crop Disease & Pests (रोग व कीट)</option>
                   <option value="Mandi Prices">Mandi Prices (मंडी भाव)</option>
-                  <option value="Fertilizer Query">Fertilizer Query (खाद व पोषण)</option>
-                  <option value="Organic Farming">Organic Farming (जैविक खेती)</option>
+                  <option value="Fertilizer Query">Fertilizer & Nutrition (खाद व पोषण)</option>
+                  <option value="Organic Farming">Organic & Bio Farming (जैविक खेती)</option>
                   <option value="Machinery">Machinery & Irrigation (मशीनरी व सिंचाई)</option>
                 </select>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">शीर्षक (Title)</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Question Title</label>
                 <input
                   type="text"
                   required
                   value={postTitle}
                   onChange={(e) => setPostTitle(e.target.value)}
-                  placeholder="e.g. गेहूँ की पत्तियों पर पीले धब्बे दिख रहे हैं..."
+                  placeholder="e.g. Yellow rust spots appearing on wheat flag leaves..."
                   className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">विस्तृत विवरण (Details)</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Detailed Field Observations</label>
                 <textarea
                   rows={4}
                   required
                   value={postContent}
                   onChange={(e) => setPostContent(e.target.value)}
-                  placeholder="फसल की किस्म, बुवाई की तारीख और जो भी लक्षण दिखाई दे रहे हैं लिखें..."
+                  placeholder="Mention crop variety, sowing date, soil moisture, and symptoms noticed..."
                   className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none"
                 />
               </div>
@@ -181,15 +196,15 @@ export const CommunityView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs text-slate-600 font-semibold"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs text-slate-600 font-semibold hover:bg-slate-50"
                 >
-                  रद्द करें
+                  Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold"
+                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20"
                 >
-                  पोस्ट प्रकाशित करें
+                  Publish Question
                 </button>
               </div>
             </form>

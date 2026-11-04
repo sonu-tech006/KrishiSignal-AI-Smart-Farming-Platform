@@ -8,7 +8,8 @@ import {
   TrendingUp, 
   FileText, 
   Layers,
-  Sparkles
+  Sparkles,
+  X
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { FarmActivity, ExpenseRecord } from '../../types';
@@ -70,20 +71,18 @@ export const FarmDiaryView: React.FC = () => {
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* 1. TOP HEADER */}
-      <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-              {language === 'hi' ? 'खेत डायरी, खर्च व मुनाफा खाता' : 'Farm Activity Diary & Expense Ledger'}
+              Farm Activity Diary & Expense Ledger
             </h1>
             <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
               {activeFarm.farmName}
             </span>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            {language === 'hi'
-              ? 'बुवाई से कटाई तक का प्रत्येक खर्च और कार्य दर्ज करें और वास्तविक मुनाफे का हिसाब रखें'
-              : 'Log daily agricultural activities, input expenditures, and monitor seasonal cash flows'}
+            Log field operations from sowing to harvest and maintain accurate profit and loss balances.
           </p>
         </div>
 
@@ -93,7 +92,7 @@ export const FarmDiaryView: React.FC = () => {
             className="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold shadow-md shadow-emerald-700/20 flex items-center gap-1.5 transition-all"
           >
             <Plus className="w-4 h-4" />
-            <span>{language === 'hi' ? '+ कार्य दर्ज करें' : '+ Log Activity'}</span>
+            <span>+ Log Activity</span>
           </button>
 
           <button
@@ -101,52 +100,52 @@ export const FarmDiaryView: React.FC = () => {
             className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold flex items-center gap-1.5 transition-all"
           >
             <Plus className="w-4 h-4" />
-            <span>{language === 'hi' ? '+ खर्च जोड़ें' : '+ Add Expense'}</span>
+            <span>+ Add Expense</span>
           </button>
         </div>
       </div>
 
       {/* 2. PROFIT & LOSS FINANCIAL SNAPSHOT CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
-            {language === 'hi' ? 'कुल इनपुट खर्च (अब तक)' : 'Total Input Cost (To Date)'}
+            Total Input Costs (To Date)
           </span>
           <p className="text-2xl sm:text-3xl font-black text-rose-600 mt-1">
             ₹{totalExpense.toLocaleString('en-IN')}
           </p>
           <span className="text-[11px] text-slate-500 block mt-1">
-            ₹{Math.round(totalExpense / activeFarm.landAreaAcres)} {language === 'hi' ? 'प्रति एकड़' : 'per acre'}
+            ₹{Math.round(totalExpense / activeFarm.landAreaAcres)} per acre average
           </span>
         </div>
 
-        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+        <div className="bg-white p-5 rounded-3xl border border-slate-200 shadow-xs">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
-            {language === 'hi' ? 'अनुमानित फसल बिक्री आय' : 'Projected Gross Harvest Value'}
+            Projected Gross Harvest Value
           </span>
           <p className="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
             ₹{expectedRevenue.toLocaleString('en-IN')}
           </p>
           <span className="text-[11px] text-emerald-600 font-semibold block mt-1">
-            Based on 99 Qtl @ ₹2,380/Qtl (Kanpur Mandi)
+            Based on 99 Quintals @ ₹2,380/Qtl (Kanpur Mandi)
           </span>
         </div>
 
         <div className="bg-gradient-to-br from-emerald-900 to-teal-900 text-white p-5 rounded-3xl shadow-lg">
           <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider block">
-            {language === 'hi' ? 'अनुमानित शुद्ध किसान मुनाफा' : 'Projected Net Farm Profit'}
+            Estimated Net Farm Profit
           </span>
           <p className="text-2xl sm:text-3xl font-black text-emerald-400 mt-1">
             ₹{estimatedNetProfit.toLocaleString('en-IN')}
           </p>
           <span className="text-[11px] text-emerald-200 block mt-1">
-            Net Return on Investment: {Math.round((estimatedNetProfit / totalExpense) * 100)}%
+            Net Return on Input Investment: {Math.round((estimatedNetProfit / totalExpense) * 100)}%
           </span>
         </div>
       </div>
 
       {/* 3. TABS: ACTIVITIES VS EXPENSES */}
-      <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+      <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-4">
         <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
           <button
             onClick={() => setActiveTab('activities')}
@@ -154,7 +153,7 @@ export const FarmDiaryView: React.FC = () => {
               activeTab === 'activities' ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-50'
             }`}
           >
-            {language === 'hi' ? 'दैनिक खेत कार्य (Diary Logs)' : 'Farm Activity Diary'}
+            Farm Activity Logs ({activities.length})
           </button>
           <button
             onClick={() => setActiveTab('expenses')}
@@ -162,7 +161,7 @@ export const FarmDiaryView: React.FC = () => {
               activeTab === 'expenses' ? 'bg-emerald-700 text-white' : 'text-slate-600 hover:bg-slate-50'
             }`}
           >
-            {language === 'hi' ? 'मदवार खर्च सूची (Expense Items)' : 'Detailed Expense Breakdown'}
+            Detailed Expense Items ({expenses.length})
           </button>
         </div>
 
@@ -212,16 +211,31 @@ export const FarmDiaryView: React.FC = () => {
         )}
       </div>
 
-      {/* 4. ACTIVITY MODAL */}
+      {/* 4. ACTIVITY MODAL (WITH ACCESSIBLE CLOSE (X) BUTTON & BACKDROP) */}
       {showActModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 animate-in fade-in">
-            <h3 className="text-base font-bold text-slate-900 mb-4">
-              {language === 'hi' ? 'नया कृषि कार्य दर्ज करें' : 'Log Agricultural Activity'}
-            </h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" 
+            onClick={() => setShowActModal(false)} 
+          />
+          <div className="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 z-10 animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+              <h3 className="text-base font-bold text-slate-900">
+                Log Agricultural Activity
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowActModal(false)}
+                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                title="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
             <form onSubmit={handleSaveActivity} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">कार्य प्रकार</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Activity Type</label>
                 <select
                   value={actType}
                   onChange={(e) => setActType(e.target.value as any)}
@@ -237,7 +251,7 @@ export const FarmDiaryView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">विवरण</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Description</label>
                 <input
                   type="text"
                   required
@@ -250,7 +264,7 @@ export const FarmDiaryView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">दिनांक</label>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">Date</label>
                   <input
                     type="date"
                     value={actDate}
@@ -259,7 +273,7 @@ export const FarmDiaryView: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">लागत / मजदूरी (₹)</label>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">Cost / Labor (₹)</label>
                   <input
                     type="number"
                     min="0"
@@ -274,15 +288,15 @@ export const FarmDiaryView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowActModal(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs text-slate-600 font-semibold"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs text-slate-600 font-semibold hover:bg-slate-50"
                 >
-                  रद्द करें
+                  Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold"
+                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20"
                 >
-                  सुरक्षित करें
+                  Save Activity
                 </button>
               </div>
             </form>
@@ -290,16 +304,31 @@ export const FarmDiaryView: React.FC = () => {
         </div>
       )}
 
-      {/* 5. EXPENSE MODAL */}
+      {/* 5. EXPENSE MODAL (WITH ACCESSIBLE CLOSE (X) BUTTON & BACKDROP) */}
       {showExpModal && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 animate-in fade-in">
-            <h3 className="text-base font-bold text-slate-900 mb-4">
-              {language === 'hi' ? 'नया खर्च दर्ज करें' : 'Record Input Expense'}
-            </h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" 
+            onClick={() => setShowExpModal(false)} 
+          />
+          <div className="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 z-10 animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+              <h3 className="text-base font-bold text-slate-900">
+                Record Input Expense
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowExpModal(false)}
+                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                title="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
             <form onSubmit={handleSaveExpense} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">खर्च श्रेणी</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Expense Category</label>
                 <select
                   value={expCategory}
                   onChange={(e) => setExpCategory(e.target.value as any)}
@@ -315,7 +344,7 @@ export const FarmDiaryView: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">खर्च का नाम</label>
+                <label className="text-xs font-bold text-slate-700 block mb-1">Expense Title</label>
                 <input
                   type="text"
                   required
@@ -328,7 +357,7 @@ export const FarmDiaryView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">रकम (₹)</label>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">Amount (₹)</label>
                   <input
                     type="number"
                     min="1"
@@ -339,7 +368,7 @@ export const FarmDiaryView: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-700 block mb-1">तारीख</label>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">Date</label>
                   <input
                     type="date"
                     value={expDate}
@@ -353,15 +382,15 @@ export const FarmDiaryView: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowExpModal(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs text-slate-600 font-semibold"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs text-slate-600 font-semibold hover:bg-slate-50"
                 >
-                  रद्द करें
+                  Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold"
+                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20"
                 >
-                  खर्च जोड़ें
+                  Add Expense
                 </button>
               </div>
             </form>

@@ -54,7 +54,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<FarmerProfile>(DEMO_FARMERS[0]);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
-  const [language, setLanguage] = useState<Language>('hi'); // Default Hindi for UP farmers
+  const [language, setLanguage] = useState<Language>('en'); // Primarily English as requested
   const [farms, setFarms] = useState<Farm[]>(INITIAL_FARMS);
   const [activeFarm, setActiveFarm] = useState<Farm>(INITIAL_FARMS[0]);
   const [cropCycles, setCropCycles] = useState<CropCycle[]>(INITIAL_CROPS);
