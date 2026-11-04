@@ -86,7 +86,7 @@ export const DashboardOverview: React.FC = () => {
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-              Welcome, {user.displayName.split(' ')[0]} <span className="text-xs text-slate-400 font-normal">({user.displayName})</span>
+              Welcome, {user.displayName.split(' ')[0]}
             </h1>
             <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold border border-emerald-200">
               Verified Farmer

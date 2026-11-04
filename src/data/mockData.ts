@@ -19,19 +19,19 @@ export const DEMO_FARMERS: FarmerProfile[] = [
   {
     id: 'farmer-1',
     clerkUserId: 'user_2xyz_ramesh',
-    displayName: 'Ramesh Kumar (रमेश कुमार)',
+    displayName: 'Ramesh Kumar',
     email: 'ramesh.farmer@krishisignal.in',
     phone: '+91 98390 12345',
     state: 'Uttar Pradesh',
     district: 'Kanpur Nagar',
-    preferredLanguage: 'hi',
+    preferredLanguage: 'en',
     createdAt: '2024-03-15T00:00:00Z',
     avatarUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=256&q=80'
   },
   {
     id: 'farmer-2',
     clerkUserId: 'user_3abc_sunita',
-    displayName: 'Sunita Devi (सुनीता देवी)',
+    displayName: 'Sunita Devi',
     email: 'sunita.devi@krishisignal.in',
     phone: '+91 94150 98765',
     state: 'Uttar Pradesh',
@@ -46,7 +46,7 @@ export const INITIAL_FARMS: Farm[] = [
   {
     id: 'farm-1',
     ownerId: 'farmer-1',
-    farmName: 'Ganga Khet — Kalyanpur (गंगा खेत)',
+    farmName: 'Ganga Khet — Kalyanpur',
     locationLabel: 'Kalyanpur, Kanpur Nagar, Uttar Pradesh',
     state: 'Uttar Pradesh',
     district: 'Kanpur Nagar',
@@ -74,7 +74,7 @@ export const INITIAL_FARMS: Farm[] = [
   {
     id: 'farm-2',
     ownerId: 'farmer-1',
-    farmName: 'Purwa Bagicha — Bithoor (बिठूर बाग)',
+    farmName: 'Purwa Bagicha — Bithoor',
     locationLabel: 'Bithoor, Kanpur Nagar, Uttar Pradesh',
     state: 'Uttar Pradesh',
     district: 'Kanpur Nagar',
